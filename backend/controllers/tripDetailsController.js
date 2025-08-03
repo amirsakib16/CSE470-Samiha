@@ -2,7 +2,7 @@
 const Trip = require("../models/tripModel");
 
 // Get trip details by user email
-exports.getTripDetailsByUser = async (req, res) => {
+exports.getTripsByUser = async (req, res) => {
   try {
     const { email } = req.params;
     const tripDetails = await Trip.find({ userEmail: email });

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { getTripDetailsByUser } from "../controllers/tripDetailsController";
 
 function TripDetails() {
   const [trips, setTrips] = useState([]);
@@ -8,10 +7,19 @@ function TripDetails() {
   useEffect(() => {
     const fetchTrips = async () => {
       const userEmail = localStorage.getItem("userEmail");
+      console.log("📨 Email from localStorage:", userEmail);
+
       if (userEmail) {
-        const data = await getTripDetailsByUser(userEmail);
-        setTrips(data);
+        try {
+          const response = await fetch(`http://localhost:5000/api/tripDetails/user/${userEmail}`);
+          const data = await response.json();
+          console.log("📦 Trips fetched:", data);
+          setTrips(data);
+        } catch (error) {
+          console.error("❌ Failed to fetch trips:", error);
+        }
       }
+
       setLoading(false);
     };
 

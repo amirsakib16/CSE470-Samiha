@@ -1,6 +1,6 @@
 // src/controllers/tripDetailsController.js
 
-export const getTripDetailsByUser = async (email) => {
+export const getTripsByUser = async (email) => {
   try {
     const response = await fetch(`http://localhost:5000/api/tripDetails/user/${email}`);
     if (!response.ok) {
