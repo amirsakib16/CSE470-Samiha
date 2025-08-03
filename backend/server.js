@@ -26,6 +26,7 @@ const dashboardRoutes = require("./routes/dashboardRoute");
 app.use("/api/dashboard", dashboardRoutes);
 const tripRoutes = require("./routes/tripRoutes");
 app.use("/api/trips", tripRoutes);
+
 const tripDetailsRoutes = require("./routes/tripDetailsRoutes");
 app.use("/api/tripDetails", tripDetailsRoutes);
 

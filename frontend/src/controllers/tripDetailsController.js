@@ -1,15 +1,15 @@
-export const getUserTrips = async (userEmail) => {
-  try {
-    const response = await fetch(`http://localhost:5000/api/tripDetails/user/${userEmail}`);
-    
-    if (!response.ok) {
-      throw new Error("Failed to fetch trips");
-    }
+// src/controllers/tripDetailsController.js
 
+export const getTripDetailsByUser = async (email) => {
+  try {
+    const response = await fetch(`http://localhost:5000/api/tripDetails/user/${email}`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch trip details");
+    }
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Error in getUserTrips:", error);
-    throw error;
+    console.error("Error in getTripDetailsByUser:", error.message);
+    return [];
   }
 };

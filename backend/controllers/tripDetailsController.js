@@ -1,17 +1,14 @@
-const TripDetails = require("../models/tripDetails");
+// controllers/tripDetailsController.js
+const Trip = require("../models/tripModel");
 
-// Get all trips created by a specific user
-const getTripsByUserEmail = async (req, res) => {
+// Get trip details by user email
+exports.getTripDetailsByUser = async (req, res) => {
   try {
-    const userEmail = req.params.email;
-    const trips = await TripDetails.find({ userEmail });
-    res.status(200).json(trips);
+    const { email } = req.params;
+    const tripDetails = await Trip.find({ userEmail: email });
+    res.status(200).json(tripDetails);
   } catch (error) {
-    console.error("Error fetching user trips:", error);
-    res.status(500).json({ message: "Failed to fetch trips." });
+    console.error("Error fetching trip details:", error);
+    res.status(500).json({ message: error.message });
   }
-};
-
-module.exports = {
-  getTripsByUserEmail,
 };

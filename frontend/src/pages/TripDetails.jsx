@@ -1,31 +1,37 @@
-// src/pages/TripDetails.jsx
 import React, { useEffect, useState } from "react";
-import { getUserTrips } from "../controllers/tripDetailsController"; // frontend controller
+import { getTripDetailsByUser } from "../controllers/tripDetailsController";
 
 function TripDetails() {
   const [trips, setTrips] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const userEmail = localStorage.getItem("userEmail");
-    if (userEmail) {
-      getUserTrips(userEmail)
-        .then(setTrips)
-        .catch((err) => console.error("Failed to fetch trips:", err));
-    }
+    const fetchTrips = async () => {
+      const userEmail = localStorage.getItem("userEmail");
+      if (userEmail) {
+        const data = await getTripDetailsByUser(userEmail);
+        setTrips(data);
+      }
+      setLoading(false);
+    };
+
+    fetchTrips();
   }, []);
 
+  if (loading) return <p>Loading trip details...</p>;
+
   return (
-    <div>
-      <h2>My Trips</h2>
+    <div className="trip-details-container">
+      <h2>Your Trip Details</h2>
       {trips.length === 0 ? (
-        <p>No trips created yet.</p>
+        <p>No trips found.</p>
       ) : (
         <ul>
           {trips.map((trip) => (
             <li key={trip._id}>
-              <h4>{trip.destination}</h4>
-              <p><strong>Start:</strong> {new Date(trip.startDate).toLocaleDateString()}</p>
-              <p><strong>End:</strong> {new Date(trip.endDate).toLocaleDateString()}</p>
+              <h3>{trip.destination}</h3>
+              <p><strong>Start Date:</strong> {trip.startDate?.slice(0, 10)}</p>
+              <p><strong>End Date:</strong> {trip.endDate?.slice(0, 10)}</p>
               <p><strong>Budget:</strong> ${trip.budget}</p>
               <p><strong>Description:</strong> {trip.description}</p>
             </li>
