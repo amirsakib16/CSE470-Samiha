@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import '../styles/signup.css';
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -41,7 +42,11 @@ function Signup() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Signup</h2>
+      <div className="form-title">
+        <img src="/logo.png" alt="Logo" className="logo" />
+        <h2>Signup</h2>
+      </div>
+
       <input name="name" placeholder="Name" value={formData.name} onChange={handleChange} required />
       <input name="location" placeholder="Location" value={formData.location} onChange={handleChange} required />
       <input name="age" type="number" placeholder="Age" value={formData.age} onChange={handleChange} required />

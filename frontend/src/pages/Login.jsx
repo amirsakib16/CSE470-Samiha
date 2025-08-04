@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from '../controllers/authController';  // controller call
-
+import '../styles/login.css';
 function Login() {
   const navigate = useNavigate();
 
@@ -38,7 +38,8 @@ function Login() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Login</h2>
+      <div className='login-title'><img src="/logo.png" alt="Logo" className="logo" />
+      <h2>Login</h2></div>
       <input
         name="email"
         type="email"

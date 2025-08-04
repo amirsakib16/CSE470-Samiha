@@ -1,7 +1,7 @@
-// src/pages/Dashboard.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getDashboardData } from "../controllers/dashboardController";
+import "../styles/Dashboard.css";
 
 function Dashboard() {
   const [profile, setProfile] = useState(null);
@@ -25,15 +25,34 @@ function Dashboard() {
   if (!profile) return <p>Loading...</p>;
 
   return (
-    <div>
-      <h2>Welcome, {profile.name}</h2>
-      <p><strong>Email:</strong> {profile.email}</p>
-      <p><strong>Location:</strong> {profile.location}</p>
-      <p><strong>Age:</strong> {profile.age}</p>
-      <p><strong>NID:</strong> {profile.nidNo}</p>
+    <div className="dashboard-container">
+      <div className="glass-card">
+        <h2>Welcome, {profile.name}</h2>
 
-      <button onClick={goToCreateTrip}>➕ Create Trip Plan</button>
-      <button onClick={goToTripDetails}>📋 View My Trips</button>
+        <div className="info-grid">
+          <div className="info-item">
+            <strong>Email:</strong>
+            <span>{profile.email}</span>
+          </div>
+          <div className="info-item">
+            <strong>Location:</strong>
+            <span>{profile.location}</span>
+          </div>
+          <div className="info-item">
+            <strong>Age:</strong>
+            <span>{profile.age}</span>
+          </div>
+          <div className="info-item">
+            <strong>NID:</strong>
+            <span>{profile.nidNo}</span>
+          </div>
+        </div>
+
+        <div className="button-group">
+          <button onClick={goToCreateTrip}>➕ Create Trip Plan</button>
+          <button onClick={goToTripDetails}>📋 View My Trips</button>
+        </div>
+      </div>
     </div>
   );
 }

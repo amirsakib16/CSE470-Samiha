@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "../styles/TripDetails.css";
 
 function TripDetails() {
   const [trips, setTrips] = useState([]);
@@ -30,18 +31,33 @@ function TripDetails() {
 
   return (
     <div className="trip-details-container">
-      <h2>Your Trip Details</h2>
+      <h2>Your <img src="/logo.png" alt="Logo" className="logo" /> Trip Details</h2>
       {trips.length === 0 ? (
         <p>No trips found.</p>
       ) : (
         <ul>
           {trips.map((trip) => (
-            <li key={trip._id}>
-              <h3>{trip.destination}</h3>
-              <p><strong>Start Date:</strong> {trip.startDate?.slice(0, 10)}</p>
-              <p><strong>End Date:</strong> {trip.endDate?.slice(0, 10)}</p>
-              <p><strong>Budget:</strong> ${trip.budget}</p>
-              <p><strong>Description:</strong> {trip.description}</p>
+            <li key={trip._id} className="trip-card">
+              <div className="trip-section">
+                <strong>Destination:</strong>
+                <span>{trip.destination}</span>
+              </div>
+              <div className="trip-section">
+                <strong>Budget:</strong>
+                <span className="taka">${trip.budget}</span>
+              </div>
+              <div className="trip-section">
+                <strong>Description:</strong>
+                <span>{trip.description}</span>
+              </div>
+              <div className="trip-section">
+                <strong>Start:</strong>
+                <span>{trip.startDate?.slice(0, 10)}</span>
+              </div>
+              <div className="trip-section">
+                <strong>End:</strong>
+                <span>{trip.endDate?.slice(0, 10)}</span>
+              </div>
             </li>
           ))}
         </ul>
