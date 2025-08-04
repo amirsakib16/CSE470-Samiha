@@ -11,7 +11,7 @@ function TripDetails() {
 
       if (userEmail) {
         try {
-          const response = await fetch(`http://localhost:5000/api/tripDetails/user/${userEmail}`);
+          const response = await fetch(`http://localhost:3000/api/tripDetails/user/${userEmail}`);
           const data = await response.json();
           console.log("📦 Trips fetched:", data);
           setTrips(data);

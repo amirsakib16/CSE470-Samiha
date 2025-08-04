@@ -3,7 +3,7 @@ import { createTrip } from "../controllers/tripController";
 
 function CreateTrip() {
   const [formData, setFormData] = useState({
-    userEmail: "",
+    userEmail: "",        // This should be set from localStorage
     destination: "",
     startDate: "",
     endDate: "",
@@ -11,7 +11,6 @@ function CreateTrip() {
     description: "",
   });
 
-    
   const handleChange = (e) => {
     setFormData((prev) => ({
       ...prev,
@@ -21,12 +20,26 @@ function CreateTrip() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const userEmail = localStorage.getItem("userEmail");
-    const result = await createTrip(formData);
+
+    if (!userEmail) {
+      alert("User email not found in localStorage. Please login first.");
+      return;
+    }
+
+    // overwrite userEmail in formData with the one from localStorage
+    const tripData = {
+      ...formData,
+      userEmail: userEmail,
+    };
+
+    const result = await createTrip(tripData);
+
     if (result && result._id) {
       alert("✅ Trip created successfully!");
       setFormData({
-        userEmail: "",
+        userEmail: "",  // you can keep this empty because next time it'll be overwritten
         destination: "",
         startDate: "",
         endDate: "",
@@ -41,7 +54,15 @@ function CreateTrip() {
   return (
     <form onSubmit={handleSubmit}>
       <h2>Create a Trip</h2>
-      
+
+      {/* If you want to show user email but not allow editing, use readOnly or disabled */}
+      <input
+        type="text"
+        name="userEmail"
+        placeholder="Email"
+        value={localStorage.getItem("userEmail") || ""}
+        readOnly
+      />
 
       <input
         type="text"

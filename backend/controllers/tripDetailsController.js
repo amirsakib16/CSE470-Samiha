@@ -1,4 +1,3 @@
-// controllers/tripDetailsController.js
 const Trip = require("../models/tripModel");
 
 // Get trip details by user email

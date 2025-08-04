@@ -1,6 +1,6 @@
 // src/controllers/dashboardController.js
 
-const API = "http://localhost:5000/api/dashboard";
+const API = "http://localhost:3000/api/dashboard";
 
 export const getDashboardData = async (email) => {
   const res = await fetch(API, {

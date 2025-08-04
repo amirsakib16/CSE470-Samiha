@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api/trips";
+const API_URL = "http://localhost:3000/api/trips";
 
 export const createTrip = async (tripData) => {
   try {
